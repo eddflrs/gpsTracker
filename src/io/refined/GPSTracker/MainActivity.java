@@ -1,8 +1,12 @@
 package io.refined.GPSTracker;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
@@ -15,6 +19,7 @@ public class MainActivity extends Activity {
 	SQLiteDatabase db;
 	
     int clickCount = 0;
+    LocationManager locationManager;
 	
 	
     @Override
@@ -23,7 +28,43 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);       
         registerListeners();
         initDatabase();
+        initLocator();
     }
+
+	private void initLocator() {
+		locationManager = (LocationManager) this.getSystemService(
+				Context.LOCATION_SERVICE);
+		LocationListener locationListener = new LocationListener() {
+			
+			@Override
+			public void onLocationChanged(Location location) {
+				// TODO Auto-generated method stub
+				System.out.println("Location changed to " + location.getLatitude() + ", " + location.getLongitude());
+				
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);		
+	}
 
 	private void initDatabase() {
 		this.db = latLongsOpenHelper.getWritableDatabase();		
@@ -53,7 +94,13 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				System.out.println("Clicked on stopButton");	
 				Cursor cursor = db.rawQuery("SELECT * FROM latlongs", null);
-				System.out.println("Database count is " + cursor.getCount());				
+				System.out.println("Database count is " + cursor.getCount());	
+				
+				while (cursor.moveToNext()) {
+					String lat = cursor.getString(0);
+					String lon = cursor.getString(1);
+					System.out.println("[" + lat + ", " + lon + "]");
+				}
 			}
 		});
 	}
