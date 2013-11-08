@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class LatLongsOpenHelper extends SQLiteOpenHelper {
-
 	
 	private static final String DATABASE_NAME = "gpstracker";
 	private static final int DATABASE_VERSION = 2;

@@ -4,5 +4,7 @@
     <string name="app_name">GPSTracker</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_gpsdata_view">GPSDataView</string>
+    <string name="track">Track</string>
 
 </resources>
