@@ -27,40 +27,21 @@ public class MainActivity extends Activity {
     }
 
 	private void registerListeners() {
-//		final Button startButton = (Button) findViewById(R.id.startButton);
-//        final Button stopButton = (Button) findViewById(R.id.stopButton);
 
 		final ToggleButton trackTB = (ToggleButton) findViewById(R.id.trackTB);
 		
-		trackTB.setOnClickListener(new View.OnClickListener() {
-			
+		trackTB.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				if (trackTB.isChecked()) {
-					Log.d(TAG, "Clicked the toggle!");				
+					startService(new Intent(self, LocationService.class));				
+				} else {
+					stopService(new Intent(self, LocationService.class));
+					latLongStorage.dump();
 				}
 			}
-		});		
-        
-//        startButton.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {				
-//				startService(new Intent(self, LocationService.class));
-//			}
-//		});
-//		
-//        stopButton.setOnClickListener(new View.OnClickListener() {		
-//
-//			@Override
-//			public void onClick(View v) {				
-//				stopService(new Intent(self, LocationService.class));
-//				
-//				latLongStorage.dump();
-//			}
-//		});
+		});
 	}
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
