@@ -2,6 +2,7 @@ package io.refined.GPSTracker;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 
 public class Map extends Fragment {
 		
-	private GoogleMap map;
 	private final String TAG = "Map";
 	
 	@Override
@@ -32,7 +32,13 @@ public class Map extends Fragment {
 		FragmentManager fragMan = getActivity().getSupportFragmentManager();
 		final SupportMapFragment supportMapFrag = (SupportMapFragment) fragMan.findFragmentById(R.id.googleMap);
 		
-		supportMapFrag.getMap().getUiSettings().setZoomControlsEnabled(false);
+		GoogleMap map = supportMapFrag.getMap();
+		UiSettings settings = map.getUiSettings();
+		
+		settings.setCompassEnabled(true);
+		settings.setZoomControlsEnabled(false);
+		
+		map.setMyLocationEnabled(true);
 				
 		return fragmentView;
 	}
