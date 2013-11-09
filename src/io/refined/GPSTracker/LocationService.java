@@ -16,11 +16,11 @@ public class LocationService extends Service {
 	private LocationManager locationManager;
 	private LocationListener locationListener;	
 	
-	private LatLongStorage latLongStorage; 
+	private LatLngStorage latLngStorage; 
 
 	@Override
 	public void onCreate() {
-		latLongStorage = new LatLongStorage(this);
+		latLngStorage = new LatLngStorage(this);
 		initLocator();
 		super.onCreate();
 	}
@@ -39,7 +39,7 @@ public class LocationService extends Service {
 			@Override
 			public void onLocationChanged(Location loc) {
 				Log.d(TAG, "Location changed");
-				latLongStorage.save(loc.getLatitude(), loc.getLongitude());
+				latLngStorage.save(loc.getLatitude(), loc.getLongitude());
 			}
 
 			@Override

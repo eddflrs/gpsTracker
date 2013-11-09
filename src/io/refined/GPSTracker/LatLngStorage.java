@@ -6,17 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class LatLongStorage {
+public class LatLngStorage {
 		
 	private static final String TAG = "LatLongStorage";
 
-	private final String TABLE = "latlongs";	
+	private final String TABLE = LatLngOpenHelper.TABLE_NAME;	
 	
 	private SQLiteDatabase db;
-	private LatLongsOpenHelper latLongsOpenHelper;	
+	private LatLngOpenHelper latLongsOpenHelper;	
 	
-	public LatLongStorage(Context ctx) {
-		latLongsOpenHelper = new LatLongsOpenHelper(ctx);
+	public LatLngStorage(Context ctx) {
+		latLongsOpenHelper = new LatLngOpenHelper(ctx);
 		this.db = latLongsOpenHelper.getWritableDatabase();
 	}
 	
@@ -29,7 +29,7 @@ public class LatLongStorage {
 	}
 	
 	public void dump() {
-		String query = "SELECT * FROM latlongs";
+		String query = "SELECT * FROM " + TABLE;
 		Cursor cursor = db.rawQuery(query, null);
 		
 		Log.d(TAG, "Dumping...");

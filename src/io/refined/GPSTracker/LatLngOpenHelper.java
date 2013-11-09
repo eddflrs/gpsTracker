@@ -4,15 +4,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class LatLongsOpenHelper extends SQLiteOpenHelper {
+public class LatLngOpenHelper extends SQLiteOpenHelper {
 	
-	private static final String DATABASE_NAME = "gpstracker";
+	public static final String DATABASE_NAME = "gpstracker";
+	public static final String TABLE_NAME = "latlng";
+
 	private static final int DATABASE_VERSION = 2;
 	private static final String DICTIONARY_TABLE_CREATE = 
-			"CREATE TABLE latlongs (lat TEXT, long TEXT)";
+			"CREATE TABLE " + TABLE_NAME + " (lat TEXT, lng TEXT)";
 
 
-	LatLongsOpenHelper (Context context) {
+	LatLngOpenHelper (Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
